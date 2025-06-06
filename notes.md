@@ -1,0 +1,3 @@
+# Hackathon Notes
+
+- Currency Converter
