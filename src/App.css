@@ -140,3 +140,19 @@ button:disabled {
   color: white;
   border-color: #8884d8;
 }
+
+.toggle-switch-button {
+  margin: 0 10px;
+  padding: 4px 8px;
+  font-size: 16px;
+  background-color: #6366f1;; /* Bootstrap blue */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.toggle-switch-button:hover {
+  background-color: #8884d8; /* darker blue on hover */
+}
