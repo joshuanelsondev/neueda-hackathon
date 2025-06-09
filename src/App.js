@@ -96,13 +96,14 @@ function App() {
               </strong>
             </div>
           )}
+
           <button onClick={() => setShowChart(!showChart)}>
             {showChart ? "Hide Rate Trend" : "Show Rate Trend"}
           </button>
         </div>
 
-        {/* 🔷 Chart Section in a Separate White Box */}
-        {showChart && result !== null && !error && (
+        {/* 🔷 Chart Section — shows independently of conversion */}
+        {showChart && !error && fromCountry !== toCountry && (
           <div className="chart-box">
             <h3>Exchange Rate Trend (Last {historyRange} Days)</h3>
 
