@@ -1,17 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-
-// Map countries to their currency codes
-const countryCurrency = {
-  USA: "USD",
-  UK: "GBP",
-  France: "EUR",
-  Japan: "JPY",
-  India: "INR",
-  Canada: "CAD",
-  Australia: "AUD",
-  // Add more as needed
-};
+import countryCurrency from "./countryCurrency";
 
 function App() {
   const [fromCountry, setFromCountry] = useState("USA");
@@ -21,7 +10,6 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Replace with your actual API key from https://www.exchangerate-api.com/
   const API_KEY = process.env.REACT_APP_EXCHANGE_API_KEY;
 
   const handleConvert = async () => {
