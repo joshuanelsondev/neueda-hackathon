@@ -70,6 +70,7 @@ input[type="number"]:focus {
 }
 
 button {
+  margin-top: 0.75rem;
   width: 100%;
   padding: 0.5rem 0;
   border-radius: 0.5rem;
@@ -142,10 +143,11 @@ button:disabled {
 }
 
 .toggle-switch-button {
-  margin: 0 10px;
-  padding: 4px 8px;
-  font-size: 16px;
-  background-color: #6366f1;; /* Bootstrap blue */
+  padding: 2px 6px;         /* smaller padding */
+  font-size: 16px;          /* smaller font size */
+  min-width: auto;          /* remove default min-width if any */
+  max-width: 40px;
+  background-color: #6366f1;
   color: white;
   border: none;
   border-radius: 4px;
