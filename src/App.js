@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import "./App.css";
-import countryCurrency from "./countryCurrency";
+
+const countryCurrency = {
+  USA: "USD",
+  UK: "GBP",
+  France: "EUR",
+  Japan: "JPY",
+  India: "INR",
+  Canada: "CAD",
+  Australia: "AUD",
+};
 
 function App() {
   const [fromCountry, setFromCountry] = useState("USA");
@@ -46,14 +55,13 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h2>Currency Converter</h2>
-        <div style={{ margin: "1em 0" }}>
-          <input
-            type="number"
-            placeholder="Amount"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            style={{ marginRight: 10 }}
-          />
+        <input
+          type="number"
+          placeholder="Amount"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+        />
+        <div className="select-row">
           <select
             value={fromCountry}
             onChange={(e) => setFromCountry(e.target.value)}
@@ -64,7 +72,7 @@ function App() {
               </option>
             ))}
           </select>
-          <span style={{ margin: "0 10px" }}>to</span>
+          <span>to</span>
           <select
             value={toCountry}
             onChange={(e) => setToCountry(e.target.value)}
@@ -79,12 +87,11 @@ function App() {
         <button onClick={handleConvert} disabled={loading}>
           {loading ? "Converting..." : "Convert"}
         </button>
-        {error && <div style={{ color: "red", marginTop: 10 }}>{error}</div>}
+        {error && <div className="error-message">{error}</div>}
         {result !== null && !error && (
-          <div style={{ marginTop: 20 }}>
+          <div className="result-message">
             <strong>
-              {amount} {countryCurrency[fromCountry]} = {result}{" "}
-              {countryCurrency[toCountry]}
+              {amount} {countryCurrency[fromCountry]} = {result} {countryCurrency[toCountry]}
             </strong>
           </div>
         )}
