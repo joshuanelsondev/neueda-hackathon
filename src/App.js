@@ -13,6 +13,7 @@ function App() {
   const [error, setError] = useState("");
   const [historyRange, setHistoryRange] = useState(7);
   const [showChart, setShowChart] = useState(false);
+  const [rateButtonVisibility, setRateButtonVisibility] = useState(false);
 
   const API_KEY = process.env.REACT_APP_EXCHANGE_API_KEY;
 
@@ -37,6 +38,7 @@ function App() {
       const data = await res.json();
       if (data.result === "success") {
         setResult(data.conversion_result);
+        setRateButtonVisibility(true);
       } else {
         setError("Conversion failed. Please check your API key or try again.");
       }
@@ -96,9 +98,14 @@ function App() {
               </strong>
             </div>
           )}
-          <button onClick={() => setShowChart(!showChart)}>
-            {showChart ? "Hide Rate Trend" : "Show Rate Trend"}
-          </button>
+          {rateButtonVisibility && (
+            <button
+              className="rate-trend"
+              onClick={() => setShowChart(!showChart)}
+            >
+              {showChart ? "Hide Rate Trend" : "Show Rate Trend"}
+            </button>
+          )}
         </div>
 
         {/* 🔷 Chart Section in a Separate White Box */}
