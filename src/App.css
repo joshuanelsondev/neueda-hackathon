@@ -14,13 +14,8 @@ body, html {
 }
 
 .App-header {
-  background: #fff;
-  box-shadow: 0 8px 32px rgba(55, 48, 163, 0.12), 0 1.5px 4px rgba(0,0,0,0.04);
-  border-radius: 1.25rem;
-  padding: 2rem;
-  width: 100%;
-  max-width: 400px;
-  margin: 2rem;
+  display: flex;
+  gap: 2rem;
 }
 
 .App-header h2 {
@@ -122,7 +117,7 @@ button:disabled {
 }
 
 .chart-box {
-  background-color: #ffffff; /* Ensure it's a pure white box */
+  background-color: #ffffff; 
 }
 
 .chart-range-buttons {
