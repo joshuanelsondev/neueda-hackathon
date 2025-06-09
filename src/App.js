@@ -1,16 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import CurrencyChart from "./components/CurrencyChart";
-
-const countryCurrency = {
-  USA: "USD",
-  UK: "GBP",
-  France: "EUR",
-  Japan: "JPY",
-  India: "INR",
-  Canada: "CAD",
-  Australia: "AUD",
-};
+import countryCurrency from "./countryCurrency";
 
 function App() {
   const [fromCountry, setFromCountry] = useState("USA");
@@ -113,6 +104,11 @@ function App() {
               base={countryCurrency[fromCountry].toLowerCase()}
               target={countryCurrency[toCountry].toLowerCase()}
             />
+          <div className="result-message">
+            <strong>
+              {amount} {countryCurrency[fromCountry]} = {result}{" "}
+              {countryCurrency[toCountry]}
+            </strong>
           </div>
         )}
 
