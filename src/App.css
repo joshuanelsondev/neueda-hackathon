@@ -124,3 +124,24 @@ button:disabled {
 .chart-box {
   background-color: #ffffff; /* Ensure it's a pure white box */
 }
+
+.chart-range-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.chart-range-buttons button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.chart-range-buttons button.active {
+  background-color: #8884d8;
+  color: white;
+  border-color: #8884d8;
+}

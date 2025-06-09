@@ -10,6 +10,7 @@ function App() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [historyRange, setHistoryRange] = useState(7);
 
   const API_KEY = process.env.REACT_APP_EXCHANGE_API_KEY;
 
@@ -99,20 +100,30 @@ function App() {
         {/* 🔷 Chart Section in a Separate White Box */}
         {result !== null && !error && (
           <div className="chart-box">
-            <h3>Exchange Rate Trend (Last 30 Days)</h3>
+            <h3>Exchange Rate Trend (Last {historyRange} Days)</h3>
+
             <CurrencyChart
               base={countryCurrency[fromCountry].toLowerCase()}
               target={countryCurrency[toCountry].toLowerCase()}
+              days={historyRange}
             />
-          <div className="result-message">
-            <strong>
-              {amount} {countryCurrency[fromCountry]} = {result}{" "}
-              {countryCurrency[toCountry]}
-            </strong>
-          </div>
+
+            <div className="chart-range-buttons">
+              <button
+                className={historyRange === 7 ? "active" : ""}
+                onClick={() => setHistoryRange(7)}
+              >
+                7 Days
+              </button>
+              <button
+                className={historyRange === 30 ? "active" : ""}
+                onClick={() => setHistoryRange(30)}
+              >
+                30 Days
+              </button>
+            </div>
           </div>
         )}
-
       </header>
     </div>
   );
