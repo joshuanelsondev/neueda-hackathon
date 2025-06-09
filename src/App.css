@@ -44,7 +44,6 @@ input[type="number"]:focus {
 
 .select-row {
   display: flex;
-  align-items: center;
   gap: 0.5rem;
   margin-bottom: 1.5rem;
 }
@@ -83,8 +82,12 @@ button {
   transition: background 0.2s, opacity 0.2s;
 }
 
+.rate-trend {
+  margin-top: 1rem;
+}
+
 button:hover:not(:disabled) {
-  background: #4338ca;
+  background: #6366f1;
 }
 
 button:disabled {
@@ -137,12 +140,17 @@ button:disabled {
 }
 
 .chart-range-buttons button.active {
-  background-color: #8884d8;
+  background-color: #6366f1;
   color: white;
-  border-color: #8884d8;
+  border-color: #6366f1;
 }
 
 .toggle-switch-button {
+  margin: 0 2px;
+  width: auto;
+  padding: 8px 18px;
+  font-size: 16px;
+  background-color: #6366f1;; /* Bootstrap blue */
   padding: 2px 6px;         /* smaller padding */
   font-size: 16px;          /* smaller font size */
   min-width: auto;          /* remove default min-width if any */

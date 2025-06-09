@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState } from "react";
 import "./App.css";
 import countryCurrency from "./countryCurrency";
 import getFlagEmoji from "./helperFunctions/getFlagEmoji";
@@ -12,6 +12,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [showChart, setShowChart] = useState(false);
+  const [rateButtonVisibility, setRateButtonVisibility] = useState(false);
 
   const API_KEY = process.env.REACT_APP_EXCHANGE_API_KEY;
 
@@ -40,6 +41,7 @@ function App() {
       const data = await res.json();
       if (data.result === "success") {
         setResult(data.conversion_result);
+        setRateButtonVisibility(true);
       } else {
         setError("Conversion failed. Please check your API key or try again.");
       }
@@ -119,7 +121,9 @@ function App() {
           <button
             onClick={() => {
               if (fromCountry === toCountry) {
-                setError("Please select two different countries to view rate trends.");
+                setError(
+                  "Please select two different countries to view rate trends."
+                );
                 return;
               }
               setError(""); // clear any previous errors
