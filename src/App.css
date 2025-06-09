@@ -109,3 +109,18 @@ button:disabled {
   color: #4338ca;
   font-weight: 600;
 }
+
+.converter-box,
+.chart-box {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  margin: 30px auto;
+  width: 90%;
+  max-width: 700px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.chart-box {
+  background-color: #ffffff; /* Ensure it's a pure white box */
+}
