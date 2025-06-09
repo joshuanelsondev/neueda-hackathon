@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import CurrencyChart from "./components/CurrencyChart";
 
 const countryCurrency = {
   USA: "USD",
@@ -54,47 +55,67 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h2>Currency Converter</h2>
-        <input
-          type="number"
-          placeholder="Amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
-        <div className="select-row">
-          <select
-            value={fromCountry}
-            onChange={(e) => setFromCountry(e.target.value)}
-          >
-            {Object.keys(countryCurrency).map((country) => (
-              <option key={country} value={country}>
-                {country}
-              </option>
-            ))}
-          </select>
-          <span>to</span>
-          <select
-            value={toCountry}
-            onChange={(e) => setToCountry(e.target.value)}
-          >
-            {Object.keys(countryCurrency).map((country) => (
-              <option key={country} value={country}>
-                {country}
-              </option>
-            ))}
-          </select>
+
+        {/* 🔷 Converter Section */}
+        <div className="converter-box">
+          <h2>Currency Converter</h2>
+          <input
+            type="number"
+            placeholder="Amount"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+          />
+          <div className="select-row">
+            <select
+              value={fromCountry}
+              onChange={(e) => setFromCountry(e.target.value)}
+            >
+              {Object.keys(countryCurrency).map((country) => (
+                <option key={country} value={country}>
+                  {country}
+                </option>
+              ))}
+            </select>
+            <span>to</span>
+            <select
+              value={toCountry}
+              onChange={(e) => setToCountry(e.target.value)}
+            >
+              {Object.keys(countryCurrency).map((country) => (
+                <option key={country} value={country}>
+                  {country}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <button onClick={handleConvert} disabled={loading}>
+            {loading ? "Converting..." : "Convert"}
+          </button>
+
+          {error && <div className="error-message">{error}</div>}
+
+          {result !== null && !error && (
+            <div className="result-message">
+              <strong>
+                {amount} {countryCurrency[fromCountry]} = {result}{" "}
+                {countryCurrency[toCountry]}
+              </strong>
+            </div>
+          )}
         </div>
-        <button onClick={handleConvert} disabled={loading}>
-          {loading ? "Converting..." : "Convert"}
-        </button>
-        {error && <div className="error-message">{error}</div>}
+
+        {/* 🔷 Chart Section in a Separate White Box */}
         {result !== null && !error && (
-          <div className="result-message">
-            <strong>
-              {amount} {countryCurrency[fromCountry]} = {result} {countryCurrency[toCountry]}
-            </strong>
+          <div className="chart-box">
+            <h3>Exchange Rate Trend (Last 30 Days)</h3>
+            <CurrencyChart
+              base={countryCurrency[fromCountry].toLowerCase()}
+              target={countryCurrency[toCountry].toLowerCase()}
+            />
           </div>
         )}
+
       </header>
     </div>
   );
