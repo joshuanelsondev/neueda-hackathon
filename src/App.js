@@ -110,6 +110,7 @@ function App() {
               {countryCurrency[toCountry]}
             </strong>
           </div>
+          </div>
         )}
 
       </header>
