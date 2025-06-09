@@ -71,7 +71,20 @@ function App() {
                 </option>
               ))}
             </select>
-            <span>to</span>
+            <button
+              className="toggle-switch-button"
+              onClick={() => {
+                const temp = fromCountry;
+                setFromCountry(toCountry);
+                setToCountry(temp);
+                if (amount && !isNaN(amount)) {
+                  handleConvert();
+                }
+              }}
+            >
+              ⇄
+            </button>
+
             <select
               value={toCountry}
               onChange={(e) => setToCountry(e.target.value)}
@@ -108,8 +121,8 @@ function App() {
           )}
         </div>
 
-        {/* 🔷 Chart Section in a Separate White Box */}
-        {showChart && result !== null && !error && (
+        {/* 🔷 Chart Section — shows independently of conversion */}
+        {showChart && !error && fromCountry !== toCountry && (
           <div className="chart-box">
             <h3>Exchange Rate Trend (Last {historyRange} Days)</h3>
 
