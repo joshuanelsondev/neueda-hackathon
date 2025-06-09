@@ -23,7 +23,6 @@ function App() {
 
   // Replace with your actual API key from https://www.exchangerate-api.com/
   const API_KEY = process.env.REACT_APP_EXCHANGE_API_KEY;
-  console.log("API KEY: ", API_KEY);
 
   const handleConvert = async () => {
     setError("");
