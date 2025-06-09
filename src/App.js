@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState} from "react";
 import "./App.css";
-import CurrencyChart from "./components/CurrencyChart";
 import countryCurrency from "./countryCurrency";
 import getFlagEmoji from "./helperFunctions/getFlagEmoji";
+import ChartBox from "./components/ChartBox";
 
 function App() {
   const [fromCountry, setFromCountry] = useState("USA");
@@ -11,7 +11,6 @@ function App() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [historyRange, setHistoryRange] = useState(7);
   const [showChart, setShowChart] = useState(false);
 
   const API_KEY = process.env.REACT_APP_EXCHANGE_API_KEY;
@@ -21,6 +20,10 @@ function App() {
     setResult(null);
     if (!amount || isNaN(amount)) {
       setError("Please enter a valid amount.");
+      return;
+    }
+    if (parseFloat(amount) < 0) {
+      setError("Amount cannot be negative.");
       return;
     }
     if (fromCountry === toCountry) {
@@ -56,7 +59,10 @@ function App() {
             type="number"
             placeholder="Amount"
             value={amount}
-            onChange={(e) => setAmount(e.target.value)}
+            onChange={(e) => {
+              setAmount(e.target.value);
+              setResult(null); // 🔹 Clear result when user edits input
+            }}
           />
           <div className="select-row">
             <select
@@ -110,37 +116,26 @@ function App() {
             </div>
           )}
 
-          <button onClick={() => setShowChart(!showChart)}>
+          <button
+            onClick={() => {
+              if (fromCountry === toCountry) {
+                setError("Please select two different countries to view rate trends.");
+                return;
+              }
+              setError(""); // clear any previous errors
+              setShowChart(!showChart);
+            }}
+          >
             {showChart ? "Hide Rate Trend" : "Show Rate Trend"}
           </button>
         </div>
 
         {/* 🔷 Chart Section — shows independently of conversion */}
-        {showChart && !error && fromCountry !== toCountry && (
-          <div className="chart-box">
-            <h3>Exchange Rate Trend (Last {historyRange} Days)</h3>
-
-            <CurrencyChart
-              base={countryCurrency[fromCountry].toLowerCase()}
-              target={countryCurrency[toCountry].toLowerCase()}
-              days={historyRange}
-            />
-
-            <div className="chart-range-buttons">
-              <button
-                className={historyRange === 7 ? "active" : ""}
-                onClick={() => setHistoryRange(7)}
-              >
-                7 Days
-              </button>
-              <button
-                className={historyRange === 30 ? "active" : ""}
-                onClick={() => setHistoryRange(30)}
-              >
-                30 Days
-              </button>
-            </div>
-          </div>
+        {showChart && fromCountry !== toCountry && (
+          <ChartBox
+            base={countryCurrency[fromCountry].toLowerCase()}
+            target={countryCurrency[toCountry].toLowerCase()}
+          />
         )}
       </header>
     </div>
