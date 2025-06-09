@@ -12,7 +12,6 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [showChart, setShowChart] = useState(false);
-  const [rateButtonVisibility, setRateButtonVisibility] = useState(false);
 
   const API_KEY = process.env.REACT_APP_EXCHANGE_API_KEY;
 
@@ -41,7 +40,6 @@ function App() {
       const data = await res.json();
       if (data.result === "success") {
         setResult(data.conversion_result);
-        setRateButtonVisibility(true);
       } else {
         setError("Conversion failed. Please check your API key or try again.");
       }
@@ -69,7 +67,10 @@ function App() {
           <div className="select-row">
             <select
               value={fromCountry}
-              onChange={(e) => setFromCountry(e.target.value)}
+              onChange={(e) => {
+                setResult(null);
+                setFromCountry(e.target.value);
+              }}
             >
               {Object.keys(countryCurrency).map((country) => (
                 <option key={country} value={country}>
@@ -93,7 +94,10 @@ function App() {
 
             <select
               value={toCountry}
-              onChange={(e) => setToCountry(e.target.value)}
+              onChange={(e) => {
+                setResult(null);
+                setToCountry(e.target.value);
+              }}
             >
               {Object.keys(countryCurrency).map((country) => (
                 <option key={country} value={country}>
