@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import CurrencyChart from "./components/CurrencyChart";
 import countryCurrency from "./countryCurrency";
+import getFlagEmoji from "./helperFunctions/getFlagEmoji";
 
 function App() {
   const [fromCountry, setFromCountry] = useState("USA");
@@ -11,6 +12,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [historyRange, setHistoryRange] = useState(7);
+  const [showChart, setShowChart] = useState(false);
 
   const API_KEY = process.env.REACT_APP_EXCHANGE_API_KEY;
 
@@ -47,7 +49,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-
         {/* 🔷 Converter Section */}
         <div className="converter-box">
           <h2>Currency Converter</h2>
@@ -64,7 +65,7 @@ function App() {
             >
               {Object.keys(countryCurrency).map((country) => (
                 <option key={country} value={country}>
-                  {country}
+                  {getFlagEmoji(country)} {country}
                 </option>
               ))}
             </select>
@@ -75,7 +76,7 @@ function App() {
             >
               {Object.keys(countryCurrency).map((country) => (
                 <option key={country} value={country}>
-                  {country}
+                  {getFlagEmoji(country)} {country}
                 </option>
               ))}
             </select>
@@ -95,10 +96,13 @@ function App() {
               </strong>
             </div>
           )}
+          <button onClick={() => setShowChart(!showChart)}>
+            {showChart ? "Hide Rate Trend" : "Show Rate Trend"}
+          </button>
         </div>
 
         {/* 🔷 Chart Section in a Separate White Box */}
-        {result !== null && !error && (
+        {showChart && result !== null && !error && (
           <div className="chart-box">
             <h3>Exchange Rate Trend (Last {historyRange} Days)</h3>
 
