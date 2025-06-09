@@ -69,7 +69,20 @@ function App() {
                 </option>
               ))}
             </select>
-            <span>to</span>
+            <button
+              className="toggle-switch-button"
+              onClick={() => {
+                const temp = fromCountry;
+                setFromCountry(toCountry);
+                setToCountry(temp);
+                if (amount && !isNaN(amount)) {
+                  handleConvert();
+                }
+              }}
+            >
+              ⇄
+            </button>
+
             <select
               value={toCountry}
               onChange={(e) => setToCountry(e.target.value)}
